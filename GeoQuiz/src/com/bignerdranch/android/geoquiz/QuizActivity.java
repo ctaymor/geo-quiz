@@ -36,6 +36,12 @@ public class QuizActivity extends Activity {
 	    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QuizActivity.this.nextQuestion();
+            }
+        });
         
         mTrueButton = (Button) findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener(){
@@ -57,8 +63,7 @@ public class QuizActivity extends Activity {
         mNextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                QuizActivity.this.updateQuestion();
+                QuizActivity.this.nextQuestion();
             }
         });
         
@@ -85,6 +90,10 @@ public class QuizActivity extends Activity {
         } else {
             answerMessageId = R.string.incorrect_toast;        };
         Toast.makeText(QuizActivity.this, answerMessageId, Toast.LENGTH_SHORT).show();
-
+    };
+    
+    private void nextQuestion(){
+        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+        QuizActivity.this.updateQuestion();
     };
 }
