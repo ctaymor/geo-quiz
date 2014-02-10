@@ -45,8 +45,8 @@ public final class R {
         public static final int correct_toast=0x7f05000c;
         public static final int false_button=0x7f050009;
         public static final int incorrect_toast=0x7f05000d;
-        public static final int next_button=0x7f05000a;
-        public static final int prev_button=0x7f05000b;
+        public static final int next_button_content_desc=0x7f05000a;
+        public static final int prev_button_content_desc=0x7f05000b;
         public static final int question_africa=0x7f050005;
         public static final int question_americas=0x7f050006;
         public static final int question_asia=0x7f050007;
