@@ -36,6 +36,8 @@ public class QuizActivity extends Activity {
     };
 
     private int mCurrentIndex = 0;
+    
+    private boolean mIsCheater;
         
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class QuizActivity extends Activity {
             @Override
             public void onClick(View v){
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mIsCheater = false;
                 QuizActivity.this.updateQuestion();
             }
         });
@@ -75,7 +78,7 @@ public class QuizActivity extends Activity {
                 Intent i = new Intent(QuizActivity.this, CheatActivity.class);
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
                 i.putExtra(CheatActivity.EXTRA_ANSWER_IS_TRUE, answerIsTrue);
-                startActivity(i);
+                startActivityForResult(i, 0);
             }
         });
         
@@ -84,6 +87,15 @@ public class QuizActivity extends Activity {
         }
         
         this.updateQuestion();
+    }
+    
+    @Override
+    protected void onActivityResult(int requestionCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        } else {
+            mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+        }
     }
     
     @Override
@@ -107,10 +119,16 @@ public class QuizActivity extends Activity {
     private void checkAnswer(boolean userPressedTrue){
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
         int answerMessageId = 0;
-        if (answerIsTrue == userPressedTrue){
-            answerMessageId = R.string.correct_toast;
-        } else {
-            answerMessageId = R.string.incorrect_toast;        };
+        
+        if (mIsCheater) {
+            answerMessageId = R.string.judgement_toast;
+        } else{
+            if (answerIsTrue == userPressedTrue){
+                answerMessageId = R.string.correct_toast;
+            } else {
+                answerMessageId = R.string.incorrect_toast;
+            }
+        }
         Toast.makeText(QuizActivity.this, answerMessageId, Toast.LENGTH_SHORT).show();
 
     };

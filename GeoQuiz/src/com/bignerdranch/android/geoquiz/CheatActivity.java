@@ -1,6 +1,7 @@
 package com.bignerdranch.android.geoquiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,14 @@ public class CheatActivity extends Activity {
     
     public static final String EXTRA_ANSWER_IS_TRUE = 
             "com.bignerdranch.android.geoquiz.answer_is_true";
+    public static final String EXTRA_ANSWER_SHOWN =
+            "com.bignerdranch.android.geoquiz.answer_shown";
+    
+    private void setAnswerShownResult(Boolean isAnswerShown) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
+        setResult(RESULT_OK, data);
+    }
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,9 @@ public class CheatActivity extends Activity {
         
         mAnswerTextView = (TextView)findViewById(R.id.answerTextView);
         
+        // Answer will not be shown until the user presses the button
+        setAnswerShownResult(false);
+        
         mShowAnswer = (Button)findViewById(R.id.showAnswerButton);
         mShowAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +44,7 @@ public class CheatActivity extends Activity {
                 } else {
                     mAnswerTextView.setText(R.string.false_button);
                 }   
+                setAnswerShownResult(true);
             }
         });
     }
