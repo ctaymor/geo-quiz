@@ -24,3 +24,4 @@ http://stackoverflow.com/questions/4905370/what-are-the-differences-between-line
 
 Q3: Which activity is shown on the recents screen?  Does it depend on which
 activity you were most recently in?
+The most recent activity is the one which shows on the recents screen.
