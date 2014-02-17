@@ -17,7 +17,8 @@ import android.widget.Toast;
  * @author Caroline Taymor
  */
 public class QuizActivity extends Activity {
-    // TODO: What is proper order for variables?
+    //private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX="index";
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
@@ -32,9 +33,7 @@ public class QuizActivity extends Activity {
     };
 
     private int mCurrentIndex = 0;
-    
-    //private static final String TAG = "Quiz Activity";
-    
+        
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -66,9 +65,19 @@ public class QuizActivity extends Activity {
             }
         });
         
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
+        
         this.updateQuestion();
     }
-
+    
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
