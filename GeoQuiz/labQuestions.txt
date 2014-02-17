@@ -1,0 +1,11 @@
+Lab 3 Questions
+Q1: Can period notation be used in the definition of QuizActivity in the
+manifest (Listing 5.4)?  If so, change it.  If not, why not?
+Yes, it is possible, and I have changed it.
+
+Q2: Why is android:layout_gravity specified in Figure 5.6
+(layout-land/activity_quiz.xml) but not Listing 5.5 (layout/activity_quiz.xml)?
+
+
+Q3: Which activity is shown on the recents screen?  Does it depend on which
+activity you were most recently in?
