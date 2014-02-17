@@ -18,9 +18,11 @@ import android.widget.Toast;
  */
 public class QuizActivity extends Activity {
     //private static final String TAG = "QuizActivity";
+    // TODO: Check proper order for variables
     private static final String KEY_INDEX="index";
     private Button mTrueButton;
     private Button mFalseButton;
+    private Button mCheatButton;
     private Button mNextButton;
     private TextView mQuestionTextView;
     
@@ -62,6 +64,14 @@ public class QuizActivity extends Activity {
             public void onClick(View v){
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 QuizActivity.this.updateQuestion();
+            }
+        });
+        
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start CheatActivity
             }
         });
         
