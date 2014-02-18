@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class CheatActivity extends Activity {
+    private boolean mIsCheater = false;
     private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
@@ -16,6 +17,7 @@ public class CheatActivity extends Activity {
             "com.bignerdranch.android.geoquiz.answer_is_true";
     public static final String EXTRA_ANSWER_SHOWN =
             "com.bignerdranch.android.geoquiz.answer_shown";
+    private static final String CHEATER = "cheater";
     
     private void setAnswerShownResult(Boolean isAnswerShown) {
         Intent data = new Intent();
@@ -45,8 +47,27 @@ public class CheatActivity extends Activity {
                     mAnswerTextView.setText(R.string.false_button);
                 }   
                 setAnswerShownResult(true);
+                mIsCheater = true;
             }
         });
+        
+        if (savedInstanceState != null) {
+            mIsCheater = savedInstanceState.getBoolean(CHEATER, false);
+        }
+        
+        if (mIsCheater) {
+            if (mAnswerIsTrue) {
+                mAnswerTextView.setText(R.string.true_button);
+            } else {
+                mAnswerTextView.setText(R.string.false_button);
+            }
+            setAnswerShownResult(true);
+        }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean(CHEATER, mIsCheater);
+    }
 }
