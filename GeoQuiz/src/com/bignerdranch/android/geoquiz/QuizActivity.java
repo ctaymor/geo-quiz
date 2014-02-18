@@ -20,7 +20,8 @@ import android.widget.Toast;
 public class QuizActivity extends Activity {
     //private static final String TAG = "QuizActivity";
     // TODO: Check proper order for variables
-    private static final String KEY_INDEX="index";
+    private static final String KEY_INDEX = "index";
+    private static final String CHEATER = "cheater"; 
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mCheatButton;
@@ -84,6 +85,7 @@ public class QuizActivity extends Activity {
         
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            mIsCheater = savedInstanceState.getBoolean(CHEATER, false);
         }
         
         this.updateQuestion();
@@ -102,6 +104,7 @@ public class QuizActivity extends Activity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putBoolean(CHEATER, mIsCheater);
     }
     
     @Override
