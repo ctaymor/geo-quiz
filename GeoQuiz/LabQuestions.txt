@@ -1,0 +1,63 @@
+Lab Questions
+Caroline Taymor
+
+Chapter 1
+Q1: Why are variable names preceded by "m"?
+
+The Android style convention is to name “member”/instance variables with an m.
+
+Q2: Why is QuizActivity.this used instead of this in Listing 1.13?
+
+You need QuizActivity.this because otherwise, the this would refer to the 
+onClickListener, which is the this of that block of code. You need to indicate
+that you are calling the method on this instance of QuizActivity not this 
+instance of onClickListener.
+
+Q3: You might find this code in Listing 1.13 unclear:
+       Toast.makeText(QuizActivity.this,
+                      R.string.incorrect_toast,
+                      Toast.LENGTH_SHORT).show();
+Break it into two separate statements. You will need to define a temporary 
+variable. Do you prefer the one- or two-statement version?
+
+Toast mTempToast = Toast.makeText(QuizActivity.this, R.string.incorrect_toast, 
+Toast.LENGTH_SHORT);
+    mTempToast.show();
+
+I prefer the one-statement version. While it is slightly less clear, it seems
+repetitive and unneeded to create a temporary variable just to call show on it.
+The two-statement version just seems a little excessive.
+
+Chapter 2
+Q4: Right after Listing 2.6, the authors admit that theirs is not the best
+option for storing model data.  What isn't so great about it?
+
+Model data should not go in the controller (which is what the QuizActivity
+class is). It should go in the model, so it would be better to put the array
+ into a class which is in the model somewhere.
+
+Q5: In Listing 2.8, where is the method findViewById(int) defined?  Why don't
+you have to specify its class name?.  Why do you have to cast its return value?
+
+It is defined in Activity. You don’t have to specify a class name, because
+it is called, be default on this instance of QuizActivity which extends Activity
+and thus has its methods. It returns a View, which then must be cast to a Button,
+because we want the View to function as a Button. The View has no code which
+indicates it should act as a Button, until it is cast as such.
+
+Q6: Why is updateQuestion() (in Listing 2.9) an instance method (as opposed
+to a static method)?
+
+updateQuestion is an instance method because it will be called on the instanc
+ of QuizActivity (implicitly, by an invisible this.)
+
+Q7: In Listing 10, there is a 5-line if-else statement (counting braces). 
+Rewrite it into a single statement, as simple as possible.  Do you prefer
+the longer or shorter version?
+
+messageResId = R.string.incorrect_toast;
+if (userPressedTrue == answerIsTrue){messageResId = R.string.correct_toast};
+
+I prefer the longer version, it is more straightforward. Also, it makes me
+nervous to have assigned the default value to the incorrect string. It seems
+like it might not make errors here obvious.
