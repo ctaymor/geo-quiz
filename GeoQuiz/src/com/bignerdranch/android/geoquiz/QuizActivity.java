@@ -75,7 +75,9 @@ public class QuizActivity extends Activity {
             public void onClick(View v) {
                 if (mCurrentIndex != 0) {
                     mCurrentIndex = (mCurrentIndex - 1);
-                };
+                } else {
+                    mCurrentIndex = mQuestionBank.length - 1;
+                }
                 QuizActivity.this.updateQuestion();
             }
         });
