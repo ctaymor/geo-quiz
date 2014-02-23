@@ -14,7 +14,7 @@ import android.widget.Toast;
  * Asks a question and lets the user answer true/false, this is the
  * Controller layer.
  * 
- * @author Caroline Taymor
+ * @author Caroline Taymor ctaymor@gmail.com
  */
 public class QuizActivity extends Activity {
     private Button mTrueButton;
